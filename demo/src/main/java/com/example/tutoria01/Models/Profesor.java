@@ -1,4 +1,4 @@
-package com.example.tutoria01.Models;
+package com.example.tutoria01.models;
 
 import java.util.Date;
 import jakarta.persistence.Entity;
