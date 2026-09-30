@@ -1,8 +1,10 @@
 package com.example.tutoria01.Models;
 
 import java.util.Date;
+import jakarta.persistence.Entity;
 import java.sql.Timestamp;
 
+@Entity
 public class Profesor {
     private int id;
     private String nombres;
