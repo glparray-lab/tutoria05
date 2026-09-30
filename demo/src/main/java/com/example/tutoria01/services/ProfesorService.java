@@ -24,5 +24,23 @@ public class ProfesorService {
         return (ArrayList<Profesor>) profesorRepository.findAll();
     }
 
+    public Profesor actualizarProfesor(Profesor profesor){
+        // ternarios
+        return existeProfesor(profesor.getId()) ? profesorRepository.save(profesor) : null;
+    }
+
+    // metodo para validar si existe el profesor
+    private boolean existeProfesor(int id){
+
+        if(profesorRepository.findById(id) != null){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+    // metodo eliminar
+
 
 }
