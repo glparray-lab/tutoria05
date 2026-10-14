@@ -1,5 +1,7 @@
 package com.example.tutoria01.controllers;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,9 @@ import com.example.tutoria01.models.Profesor;
 import com.example.tutoria01.services.ProfesorService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -21,6 +26,11 @@ public class ProfesorController {
     @PostMapping
     public ResponseEntity<Profesor> crearProfesor(@RequestBody Profesor profesor){
         return ResponseEntity.ok(profesorService.creaProfesor(profesor));
+    }
+
+    @GetMapping
+    public ResponseEntity<ArrayList<Profesor>> getAll(){
+        return ResponseEntity.ok(profesorService.obtenerProfesores());
     }
     
 
