@@ -2,11 +2,21 @@ package com.example.tutoria01.models;
 
 import java.util.Date;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "profesor")
 public class Profesor {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    
     private String nombres;
     private String apellidos;
     private String dni;
