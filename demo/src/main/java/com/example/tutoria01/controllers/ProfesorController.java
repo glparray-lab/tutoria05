@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.tutoria01.models.Profesor;
 import com.example.tutoria01.services.ProfesorService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 
 @RestController
@@ -32,7 +31,11 @@ public class ProfesorController {
     public ResponseEntity<ArrayList<Profesor>> getAll(){
         return ResponseEntity.ok(profesorService.obtenerProfesores());
     }
-    
+
+    @PutMapping 
+    public ResponseEntity<Profesor> actualizarProfesor(@RequestBody Profesor profesor){
+        return ResponseEntity.ok(profesorService.actualizarProfesor(profesor));
+    }    
 
 
 }
