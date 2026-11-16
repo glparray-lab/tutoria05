@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.tutoria01.models.Profesor;
 import com.example.tutoria01.repositories.IProfesorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service 
 public class ProfesorService {
@@ -14,10 +16,17 @@ public class ProfesorService {
     @Autowired
     IProfesorRepository profesorRepository;
 
-    public Profesor creaProfesor(Profesor profesor){
-        // INSERT INTO profesor (...) VALUES();
-        return profesorRepository.save(profesor);
+    public Profesor creaProfesor(Profesor profesor) {
+
+    if (profesorRepository.existsByDni(profesor.getDni())) {
+        return null;
     }
+    if (profesorRepository.existsByCorreo(profesor.getCorreo())) {
+        return null;
+    }
+
+    return profesorRepository.save(profesor);
+}
 
     public ArrayList<Profesor> obtenerProfesores(){
         // SELECT * FROM profesor WHERE 1 = 1;
@@ -26,10 +35,20 @@ public class ProfesorService {
 
     public Profesor actualizarProfesor(Profesor profesor){
         // ternarios
-        return existeProfesor(profesor.getId()) ? profesorRepository.save(profesor) : null;
+        if (!existeProfesor(profesor.getId())) {
+        return null;
     }
 
-    // metodo para validar si existe el profesor
+    if (profesorRepository.existsByDniAndIdNot(profesor.getDni(), profesor.getId())) {
+        return null;
+    }
+
+    if (profesorRepository.existsByCorreoAndIdNot(profesor.getCorreo(), profesor.getId())) {
+        return null;
+    }
+    return profesorRepository.save(profesor);
+    }
+
     private boolean existeProfesor(int id){
 
         if(profesorRepository.findById(id) != null){
@@ -41,6 +60,12 @@ public class ProfesorService {
     }
 
     // metodo eliminar
-
+    public boolean deleteProfesor(Integer id) { 
+        if (profesorRepository.existsById(id)) {
+            profesorRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 
 }
